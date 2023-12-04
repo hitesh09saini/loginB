@@ -4,16 +4,18 @@ const cors = require('cors');
 const bcrypt = require('bcrypt'); // Add bcrypt for password hashing
 const employModel = require('./models/employs');
 
+
 const app = express();
 app.use(cors());
 app.use(express.json());
 
 const hostname = 'localhost';
-const PORT = 3000;
+const PORT =  3000;
 
-const mongoURI = "mongodb://127.0.0.1:27017/login";
 
-mongoose.connect(mongoURI, { useNewUrlParser: true, useUnifiedTopology: true })
+const MONGODB_CONNECT_URI =   "mongodb+srv://hitesh9694saini:UYpSzzRRGv5GyLhU@hitesh09.mg7ptcn.mongodb.net/?retryWrites=true&w=majority";
+
+mongoose.connect(MONGODB_CONNECT_URI , { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
         console.log('MongoDB connected');
     })
@@ -27,7 +29,6 @@ app.get('/connection', (req, res) => {
 
 app.post('/login', async (req, res) => {
     const { name, password } = req.body;
-
     try {
         
         const user = await employModel.findOne({ name });
