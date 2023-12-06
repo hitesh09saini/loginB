@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -13,7 +14,7 @@ const hostname = 'localhost';
 const PORT =  3000;
 
 
-const MONGODB_CONNECT_URI =   "mongodb+srv://hitesh9694saini:UYpSzzRRGv5GyLhU@hitesh09.mg7ptcn.mongodb.net/?retryWrites=true&w=majority";
+const MONGODB_CONNECT_URI =   process.env.MONGO_URI;
 
 mongoose.connect(MONGODB_CONNECT_URI , { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
@@ -23,7 +24,7 @@ mongoose.connect(MONGODB_CONNECT_URI , { useNewUrlParser: true, useUnifiedTopolo
         console.error('MongoDB connection error:', err);
     });
 
-app.get('/connection', (req, res) => {
+app.get('/', (req, res) => {
     res.send('Connected!');
 });
 
